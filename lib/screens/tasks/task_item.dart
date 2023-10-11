@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
@@ -27,12 +28,18 @@ class TaskItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Task Item"),
-                  Text("Task Description"),
+                  Text(AppLocalizations.of(context)!.taskTitle),
+                  Text(AppLocalizations.of(context)!.taskDescribtion),
                 ],
               ),
               Spacer(),
-              IconButton(onPressed: () {}, icon: Icon(Icons.done))
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                  child:  Icon(Icons.done,color: Colors.white,))
             ],
           ),
         ),

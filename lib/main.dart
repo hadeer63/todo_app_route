@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/firebase_options.dart';
+import 'package:todo_app/provider/my_provider.dart';
 import 'package:todo_app/shared/styles/myThemedata.dart';
-
 import 'layout/home_layout.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'screens/splash_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main()async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => MyProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,13 +25,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<MyProvider>(context);
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(pro.languageCode),
       debugShowCheckedModeBanner: false,
       theme: MyThemeData.lightTheme,
-      initialRoute: HomeLayout.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
         HomeLayout.routeName:(context)=>HomeLayout(),
+        SplashScreen.routeName:(context)=>SplashScreen()
         },
+      themeMode: pro.modeApp,
+      darkTheme: MyThemeData.darkTheme,
+
     );
   }
 }
