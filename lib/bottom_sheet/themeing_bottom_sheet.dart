@@ -8,6 +8,9 @@ class ThemeingBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider = Provider.of<MyProvider>(context);
     return Container(
+        color: provider.modeApp == ThemeMode.dark
+            ? Color(0xFF060E1E)
+            : Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -24,7 +27,7 @@ class ThemeingBottomSheet extends StatelessWidget {
                       fontSize: 20,
                         color: provider.modeApp == ThemeMode.dark
                             ? Colors.blue
-                            : Colors.black),
+                            : Colors.grey[700]),
                   ),
                   Spacer(),
                   provider.modeApp == ThemeMode.dark
@@ -52,7 +55,7 @@ class ThemeingBottomSheet extends StatelessWidget {
                       fontSize: 20,
                         color: provider.modeApp == ThemeMode.light
                             ? Colors.blue
-                            : Colors.black),
+                            : Colors.grey[700]),
                   ),
                   Spacer(),
                   provider.modeApp == ThemeMode.dark

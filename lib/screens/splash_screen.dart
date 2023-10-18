@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home_layout.dart';
 import 'package:todo_app/shared/styles/colors.dart';
+
+import '../provider/my_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "splash screen";
@@ -20,8 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<MyProvider>(context);
     return Scaffold(
-          backgroundColor: mint,
+          backgroundColor:  pro.modeApp == ThemeMode.light
+    ?mint
+      : Color(0xFF060E1E),
            body: Column(
              mainAxisAlignment: MainAxisAlignment.center,
              crossAxisAlignment: CrossAxisAlignment.center,

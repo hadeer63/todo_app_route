@@ -9,6 +9,9 @@ class LanguageBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider = Provider.of<MyProvider>(context);
     return Container(
+      color: provider.modeApp == ThemeMode.dark
+          ? Color(0xFF060E1E)
+          : Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -25,7 +28,7 @@ class LanguageBottomSheet extends StatelessWidget {
                       fontSize: 20,
                         color: provider.languageCode == "en"
                             ? Colors.blue
-                            : Colors.black),
+                            : Colors.grey[700]),
                   ),
                   Spacer(),
                   provider.languageCode == "en"
@@ -33,7 +36,7 @@ class LanguageBottomSheet extends StatelessWidget {
                           Icons.done,
                           color: provider.languageCode == "en"
                               ? Colors.blue
-                              : Colors.black,
+                              : Colors.grey[700],
                           size: 30,
                         )
                       : SizedBox.shrink()
@@ -55,7 +58,7 @@ class LanguageBottomSheet extends StatelessWidget {
                       fontSize: 20,
                         color: provider.languageCode == "ar"
                             ? Colors.blue
-                            : Colors.black),
+                            : Colors.grey[700]),
                   ),
                   Spacer(),
                   provider.languageCode == "en"
@@ -65,7 +68,7 @@ class LanguageBottomSheet extends StatelessWidget {
                           size: 30,
                           color: provider.languageCode == "ar"
                               ? Colors.blue
-                              : Colors.black,
+                              : Colors.grey[700],
                         )
                 ],
               ),

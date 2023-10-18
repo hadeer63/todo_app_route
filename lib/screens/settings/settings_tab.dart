@@ -23,7 +23,11 @@ class _SettingTabState extends State<SettingTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppLocalizations.of(context)!.language,
-              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+              style: TextStyle(
+                  color: pro.modeApp == ThemeMode.light
+                      ? Colors.black
+                      : Colors.white,
+                  fontWeight: FontWeight.bold)),
           SizedBox(
             height: 15,
           ),
@@ -38,7 +42,9 @@ class _SettingTabState extends State<SettingTab> {
               width: double.infinity,
               height: 48,
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: pro.modeApp == ThemeMode.light
+                      ? Colors.white
+                      : Color(0xFF141922),
                   border: Border.all(color: Colors.blue)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,22 +53,29 @@ class _SettingTabState extends State<SettingTab> {
                       pro.languageCode == "en"
                           ? AppLocalizations.of(context)!.english
                           : AppLocalizations.of(context)!.arabic,
-                      style: TextStyle(color: Colors.blue)
-                  ),
-                  IconButton(onPressed: (){
-                    showLanguageBottomSheet();
-                  },
-                      icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.blue,))
+                      style: TextStyle(color: Colors.blue)),
+                  IconButton(
+                      onPressed: () {
+                        showLanguageBottomSheet();
+                      },
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: Colors.blue,
+                      ))
                 ],
               ),
-
             ),
           ),
           SizedBox(
             height: 20,
           ),
           Text(AppLocalizations.of(context)!.mode,
-              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+              style:
+                  TextStyle(
+                      color: pro.modeApp == ThemeMode.light
+                          ?Colors.black
+                          : Colors.white,
+                      fontWeight: FontWeight.bold)),
           SizedBox(
             height: 15,
           ),
@@ -77,21 +90,26 @@ class _SettingTabState extends State<SettingTab> {
               width: double.infinity,
               height: 48,
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: pro.modeApp == ThemeMode.light
+                      ?Colors.white
+                      : Color(0xFF141922),
                   border: Border.all(color: Colors.blue)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                      pro.modeApp==ThemeMode.light
+                      pro.modeApp == ThemeMode.light
                           ? AppLocalizations.of(context)!.light
                           : AppLocalizations.of(context)!.dark,
-                      style: TextStyle(color: Colors.blue)
-                  ),
-                  IconButton(onPressed: (){
-                    showThemeingBottomSheet();
-                  },
-                      icon: Icon(Icons.keyboard_arrow_down_outlined,color: Colors.blue,))
+                      style: TextStyle(color: Colors.blue)),
+                  IconButton(
+                      onPressed: () {
+                        showThemeingBottomSheet();
+                      },
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: Colors.blue,
+                      ))
                 ],
               ),
             ),

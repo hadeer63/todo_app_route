@@ -12,5 +12,14 @@ class MyThemeData {
           backgroundColor: Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false));
-  static ThemeData darkTheme =ThemeData();
+  static ThemeData darkTheme =ThemeData(
+    scaffoldBackgroundColor: Color(0xFF141922),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: Colors.white,
+          backgroundColor: Color(0xFF141922),
+          showSelectedLabels: false,
+          showUnselectedLabels: false)
+  );
 }
