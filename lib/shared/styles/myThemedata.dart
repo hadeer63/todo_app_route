@@ -17,7 +17,7 @@ class MyThemeData {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: primaryColor,
-          unselectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
           backgroundColor: Color(0xFF141922),
           showSelectedLabels: false,
           showUnselectedLabels: false)

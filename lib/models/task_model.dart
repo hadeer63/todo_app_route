@@ -19,6 +19,16 @@ class TaskModel {
           isDone: json['isDone'],
           id: json['id']
   );
+  Map<String,dynamic>toJson(){
+    return {
+      "title": title,
+      "Description": Description,
+      "date": date,
+      "isDone": isDone,
+      "id": id
+    };
+
+  }
   // orr
   // TaskModel fromJson(Map<String, dynamic> json) {
   //   return TaskModel(
