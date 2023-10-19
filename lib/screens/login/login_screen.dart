@@ -10,6 +10,7 @@ class LoginScreen extends StatelessWidget {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text("Login"),
             bottom: TabBar(tabs: [

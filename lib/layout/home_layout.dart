@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/user_model.dart';
 import 'package:todo_app/provider/my_provider.dart';
+import 'package:todo_app/screens/login/login_screen.dart';
 import 'package:todo_app/screens/settings/settings_tab.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/screens/tasks/add_task_bpttom_sheet.dart';
@@ -31,11 +34,34 @@ class _HomeLayoutState extends State<HomeLayout> {
           : Color(0xFF060E1E),
       extendBody: true,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.todo,
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: pro.modeApp == ThemeMode.light
-                ?Colors.white
-                : Color(0xFF060E1E)),),
+        actions: [
+          IconButton(onPressed: (){
+            FirebaseAuth.instance.signOut();
+            Navigator.pushNamedAndRemoveUntil(context,
+                LoginScreen.routeName, (route) => false);
+          },
+          icon: Icon(Icons.logout),),
+          IconButton(onPressed: (){
+            FirebaseAuth.instance.sendPasswordResetEmail(
+                email: "haderkobak602@gmail.com");
+            Navigator.pushNamedAndRemoveUntil(context,
+                LoginScreen.routeName, (route) => false);
+          },
+          icon: Icon(Icons.send),)
+        ],
+        elevation: 0.0,
+        title: Row(
+          children: [
+            Text(AppLocalizations.of(context)!.todo,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: pro.modeApp == ThemeMode.light
+                    ?Colors.white
+                    : Color(0xFF060E1E)),),
+            SizedBox(width: 3,),
+            Text("${pro.userModel?.name}"),
+          ],
+        ),
+
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(

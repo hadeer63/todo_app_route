@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -139,6 +140,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                  if(formKy.currentState!.validate()){
                    print(DateUtils.dateOnly(selectedDate).toString());
                    TaskModel taskModel=TaskModel(
+                     userId: FirebaseAuth.instance.currentUser!.uid,
                        title: titleController.text,
                        Description: describtionController.text,
                        date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);

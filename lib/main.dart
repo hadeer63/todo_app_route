@@ -16,10 +16,11 @@ void main()async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseFirestore.instance.disableNetwork();
+  //FirebaseFirestore.instance.disableNetwork();
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => MyProvider()),
-  ], child: const MyApp()));
+  ], child:  MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,7 +36,9 @@ class MyApp extends StatelessWidget {
       locale: Locale(pro.languageCode),
       debugShowCheckedModeBanner: false,
       theme: MyThemeData.darkTheme,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: pro.firebaseUser !=null ?
+          HomeLayout.routeName
+      :LoginScreen.routeName,
       routes: {
         HomeLayout.routeName:(context)=>HomeLayout(),
         SplashScreen.routeName:(context)=>SplashScreen(),

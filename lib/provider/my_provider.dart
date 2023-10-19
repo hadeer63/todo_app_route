@@ -1,11 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/firebase/firebase_functions.dart';
 
+import '../models/user_model.dart';
 import '../shared/styles/colors.dart';
 
 class MyProvider extends ChangeNotifier {
   String languageCode = 'en';
   bool isEnglish = true;
   ThemeMode modeApp = ThemeMode.light;
+  UserModel? userModel;
+  User? firebaseUser;
+
+  MyProvider(){
+    firebaseUser=FirebaseAuth.instance.currentUser!;
+    if(firebaseUser!=null){
+      initUser();
+    }
+  }
+
+  initUser()async{
+    firebaseUser=FirebaseAuth.instance.currentUser;
+    userModel=await FirebaseFunctions
+        .readUserFirestore(firebaseUser!.uid);
+    notifyListeners();
+  }
 
   void changeLanguage(String langCode) {
     languageCode = langCode;

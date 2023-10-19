@@ -57,6 +57,11 @@ class _TasksTabState extends State<TasksTab> {
           }
           List<TaskModel>tasks=
               snapshot.data?.docs.map((e) => e.data()).toList()??[];
+          if(tasks.isEmpty){
+            return Center(
+              child: Text("No Tasks"),
+            );
+          }
            return Expanded(
              child: ListView.builder(itemBuilder:
              (context, index) {
