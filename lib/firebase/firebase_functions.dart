@@ -35,6 +35,15 @@ class FirebaseFunctions {
    return getTaskCollection().where("date",isEqualTo:
   DateUtils.dateOnly(dateTime).millisecondsSinceEpoch).snapshots();
   }
+
+  static void deleteTasks(String id){
+    getTaskCollection().doc(id).delete();
+  }
+
+  static void updateTask(TaskModel task){
+    getTaskCollection().doc(task.id).update(
+      task.toJson());
+  }
 }
 
 

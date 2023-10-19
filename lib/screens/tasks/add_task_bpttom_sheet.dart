@@ -6,6 +6,7 @@ import 'package:todo_app/shared/firebase/firebase_functions.dart';
 import 'package:todo_app/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../firebase/firebase_functions.dart';
 import '../../provider/my_provider.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
@@ -20,7 +21,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   var describtionController=TextEditingController();
 
   var selectedDate=DateTime.now();
-  var forKy=GlobalKey<FormState>();
+  var formKy=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Form(
-          key: forKy,
+          key: formKy,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,15 +136,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
               ElevatedButton(
                   onPressed: (){
-                 if(forKy.currentState!.validate()){
+                 if(formKy.currentState!.validate()){
+                   print(DateUtils.dateOnly(selectedDate).toString());
                    TaskModel taskModel=TaskModel(
                        title: titleController.text,
                        Description: describtionController.text,
-                       date: selectedDate.millisecondsSinceEpoch
-                   // FirebaseFunctions.addTask(taskModel).then((value) {
-                   //   Navigator.pop(context);
-                   // }
-                   );
+                       date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+                    FirebaseFunctions.addTask(taskModel) ;
+                     Navigator.pop(context);
+
                  }
 
               },

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/shared/styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../../firebase/firebase_functions.dart';
 import '../../models/task_model.dart';
 import '../../provider/my_provider.dart';
 
@@ -22,11 +23,18 @@ class TaskItem extends StatelessWidget {
               Color(0xFF141922),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           child: Slidable(
-            startActionPane: ActionPane(motion:DrawerMotion(),
+            startActionPane: ActionPane(
+                motion:DrawerMotion(),
                 children:[
-                  SlidableAction(onPressed: (context){
-
+                  SlidableAction(
+                      onPressed: (context){
+                        FirebaseFunctions.deleteTasks(task.id);
+                       
                   },
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(14) ,
+                        bottomLeft: Radius.circular(14),
+                      ),
                       label:"Delete",
                       icon:Icons.delete,
                       backgroundColor:Colors.red),
@@ -69,17 +77,32 @@ class TaskItem extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
+                    task.isDone?
                     Container(
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                         decoration: BoxDecoration(
-                            color: pro.modeApp == ThemeMode.light
-                                ? primaryColor
-                                : Color(0xFF5D9CEC),
+                            color: Colors.green,
                             borderRadius: BorderRadius.circular(8)),
-                        child: Icon(
-                          Icons.done,
-                          color: Colors.white,
-                        ))
+                        child: Text("Done!",style: TextStyle(
+                          color: Colors.white
+                        ),))
+                    :InkWell(
+                      onTap:() {
+                        task.isDone=true;
+                        FirebaseFunctions.updateTask(task);
+                      }, 
+                      child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                          decoration: BoxDecoration(
+                              color: pro.modeApp == ThemeMode.light
+                                  ? primaryColor
+                                  : Color(0xFF5D9CEC),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          )),
+                    )
                   ],
                 ),
             ),
