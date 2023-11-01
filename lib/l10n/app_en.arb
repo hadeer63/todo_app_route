@@ -12,5 +12,8 @@
   "mode": "Mode",
   "dark": "Dark",
   "light": "Light",
-  "addTask": "Add Task"
+  "addTask": "Add Task",
+  "editTask": "Edit Task",
+  "toDoList": "To Do List",
+  "saveChanges": "Save Changes"
 }

@@ -47,27 +47,25 @@ class FirebaseFunctions {
   }
 
  static Stream <QuerySnapshot<TaskModel>> getTasks( DateTime dateTime){
-   return getTaskCollection().where("userId",isEqualTo:
-   FirebaseAuth.instance.currentUser!.uid)
-       .where("date",isEqualTo:
-  DateUtils.dateOnly(dateTime).millisecondsSinceEpoch).snapshots();
+    return getTaskCollection()
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("date",
+            isEqualTo: DateUtils.dateOnly(dateTime).millisecondsSinceEpoch)
+        .snapshots();
   }
 
-  static void deleteTasks(String id){
+  static void deleteTasks(String id) {
     getTaskCollection().doc(id).delete();
   }
 
-  static void updateTask(TaskModel task){
-    getTaskCollection().doc(task.id).update(
-      task.toJson());
+  static Future<void> updateTask(TaskModel task) async {
+    await getTaskCollection().doc(task.id).update(task.toJson());
   }
 
-
-  static Future<void> addUserToFirestore(UserModel userModel){
-    var collection=getUserCollection();
-    var docRef=collection.doc(userModel.id);
+  static Future<void> addUserToFirestore(UserModel userModel) {
+    var collection = getUserCollection();
+    var docRef = collection.doc(userModel.id);
     return docRef.set(userModel);
-
   }
 
   static Future<void> createUser(String name,int age,String email,String password, Function onSuccess,Function onEror)async{
@@ -98,34 +96,6 @@ class FirebaseFunctions {
       }
     }catch(e){
       print(e);
-    }
-  }
-
-  static Future<void> login(String email,String password, Function onSuccess,Function onEror)async{
-    try{
-      final credential=await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if(credential.user!.uid!= null){
-       // var user=await readUserFirestore(credential.user!.uid);
-        if(credential.user!.emailVerified) {
-          onSuccess();
-        }else{
-          onEror('please verify your email');
-        }
-      }
-    }on FirebaseAuthException catch (e){
-      print("saturday ${e.message}");
-      print("saturday ${e.code}");
-      onEror("Wrong mail or password");
-      // if(e.code=="user-not-found"){
-      //   onEror(e.message);
-      //   print("No user found that email.");
-      // }else if(e.code=="wrong-password") {
-      //   onEror(e.message);
-      //   print("Wrong password provided for that user.");
-      // }
     }
   }
 

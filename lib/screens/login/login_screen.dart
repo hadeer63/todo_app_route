@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screens/login/login_tab.dart';
+import 'package:todo_app/screens/login/login_tab/login_tab.dart';
 import 'package:todo_app/screens/login/signup_tab.dart';
 
 class LoginScreen extends StatelessWidget {

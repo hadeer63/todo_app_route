@@ -13,8 +13,8 @@ class MyProvider extends ChangeNotifier {
   User? firebaseUser;
 
   MyProvider(){
-    firebaseUser=FirebaseAuth.instance.currentUser!;
-    if(firebaseUser!=null){
+    firebaseUser = FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null) {
       initUser();
     }
   }
